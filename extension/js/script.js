@@ -1,13 +1,54 @@
+const background = document.getElementById('background');
+const blurredBackground = document.getElementById('blurred-background');
+const list = document.getElementById('list');
+let index, fileNames, slideInterval;
+
 const nameInput = document.getElementById('name-input');
 const backgroundInput = document.getElementById('background-input');
 const backgroundForm = document.getElementById('background-form');
 const backgroundFormTitle = document.getElementById('background-form-title');
 const labels = document.getElementsByTagName('label');
 
-let backgroundMode = 'add';
+let storageFiles = JSON.parse(localStorage.getItem('storageFiles')) || {};
+
+// The function changing the background source,
+// called in intervals
+
+const changeBackground = () => {
+  index = (index !== fileNames.length - 1) ? index + 1 : 0;
+  background.src = blurredBackground.src = storageFiles[fileNames[index]].img;
+}
+
+// Updating and calling all necessary variables and functions
+
+const updateValues = () => {
+  index = 0;
+  fileNames = Object.keys(storageFiles);
+
+  // If there are images to display, then it will start changeBackground()
+  // Else, it will set the source of the background images to an
+  // empty string
+
+  if (fileNames.length) {
+    changeBackground();
+    slideInterval = setInterval(changeBackground, 5000);
+  } else background.src = blurredBackground.src = '';
+
+  // Emptying list before reapplying new values to it
+
+  list.innerHTML = '';
+  for (let prop in storageFiles) {
+    const item = document.createElement('div');
+    item.className = 'list-item';
+    item.innerHTML = prop;
+    list.appendChild(item);
+  }
+}
+updateValues();
 
 // Change from add/remove setting on click
 
+let backgroundMode = 'add';
 window.addEventListener('click', (e) => {
   if (e.target.className.includes('inactive')) {
 
@@ -17,11 +58,14 @@ window.addEventListener('click', (e) => {
 
     // Toggling the class 'inactive' on the menu items
 
-    (e.target.nextSibling !== null) ?
-      (e.target.nextSibling.classList.toggle('inactive'),
-      labels[0].style.visibility = 'visible') :
-      (e.target.parentNode.firstChild.classList.toggle('inactive'),
-      labels[0].style.visibility = 'hidden');
+    if (e.target.nextSibling !== null) {
+      e.target.nextSibling.classList.toggle('inactive');
+      labels[0].style.visibility = 'visible';
+    } else {
+      e.target.parentNode.firstChild.classList.toggle('inactive')
+      labels[0].style.visibility = 'hidden';
+    }
+
     e.target.classList.toggle('inactive');
 
     // Setting the setting description text
@@ -31,8 +75,6 @@ window.addEventListener('click', (e) => {
       'Remove background by name';
   }
 }, true);
-
-let storageFiles = JSON.parse(localStorage.getItem('storageFiles')) || {};
 
 console.log(Object.keys(storageFiles));
 console.log(storageFiles);
@@ -95,43 +137,3 @@ backgroundForm.addEventListener('submit', (e) => {
     updateValues();
   }
 }, false);
-
-// The function changing the background source,
-// called in intervals
-
-const changeBackground = () => {
-  index = (index != fileNames.length - 1) ? index + 1 : 0;
-  background.src = blurredBackground.src = storageFiles[fileNames[index]].img;
-}
-
-const background = document.getElementById('background');
-const blurredBackground = document.getElementById('blurred-background');
-const list = document.getElementById('list');
-let index, fileNames, slideInterval;
-
-// Updating and calling all necessary variables and functions
-
-const updateValues = () => {
-  index = 0;
-  fileNames = Object.keys(storageFiles);
-
-  // If there are images to display, then it will start changeBackground()
-  // Else, it will set the source of the background images to an
-  // empty string
-
-  if (fileNames.length) {
-    changeBackground();
-    slideInterval = setInterval(changeBackground, 5000);
-  } else background.src = blurredBackground.src = '';
-
-  // Emptying list before reapplying new values to it
-
-  list.innerHTML = '';
-  for (let prop in storageFiles) {
-    const item = document.createElement('div');
-    item.className = 'list-item';
-    item.innerHTML = prop;
-    list.appendChild(item);
-  }
-}
-updateValues();
