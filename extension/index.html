@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New tab</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id="fade-out"></div>
+
+    <div id="settings">
+
+      <div class="setting-tab"><p>Background</p></div>
+      <div class="setting-tab"><p>General</p></div>
+
+      <img src="images/x.svg" id="exit">
+
+      <hr>
+
+      <div id="background-settings">
+        <div><div class="background-settings-tab" id="add">
+            <p>Add</p>
+          </div><div class="background-settings-tab inactive" id="remove">
+            <p>Remove</p>
+          </div></div>
+
+        <form id="background-form">
+          <p id="background-form-title">Add background</p>
+
+          <input id="name-input" type="text" placeholder="Name">
+          <input id="background-input" type="file" value="Background">
+          <label for="background-input">Background</label>
+          <input id="submit-button" type="submit" value="Submit">
+        </form>
+
+        <div id="list">
+
+        </div>
+      </div>
+
+      <div id="general-settings">
+
+        <div class="setting-section" style="padding: 20px 20px 50px 20px; margin-top: 100px;">
+          <p class="setting-title">Dark mode</p>
+          <p style="float:left; margin: -3px 0 0 207px;">OFF</p>
+          <p style="float:right; margin: -3px 0 0 0;">ON</p>
+          <div class="bar dark-mode">
+            <div class="circle dark-mode"></div>
+          </div>
+        </div>
+
+        <div class="setting-section" style="padding: 20px 20px 170px 20px;">
+          <p class="setting-title">Search bar</p>
+          <p style="float:left; margin: -3px 0 0 212px;">OFF</p>
+          <p style="float:right; margin: -3px 0 0 0;">ON</p>
+          <div class="bar search-bar">
+            <div class="circle search-bar"></div>
+          </div>
+
+          <div id="search-cover"></div>
+
+          <p class="setting-title" style="margin-top: 26px;">Search engine</p>
+          <div class="drop-down-menu">
+            <p class="drop-down">Google</p>
+            <div class="menu-items">
+              <div class="item search-engine"><p class="search-engine">Bing</p></div>
+              <div class="item search-engine"><p class="search-engine">DuckDuckGo</p></div>
+              <div class="item search-engine" style="border-radius: 0 0 20px 20px;"><p class="search-engine">Ecosia</p></div>
+            </div>
+          </div>
+
+          <p class="setting-title" style="margin-top: 26px;">Search bar position</p>
+          <div class="selection-holder">
+            <p class="selection-text search_bar-top" style="float: left;">Top</p>
+            <div class="selection-button-outline search_bar-top" style="float: left;">
+              <div class="selection-button search_bar-top"></div>
+            </div>
+            <div class="selection-button-outline search_bar-middle" style="float: right;">
+              <div class="selection-button search_bar-middle"></div>
+            </div>
+            <p class="selection-text search_bar-middle" style="float: right;">Middle</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img id="blurred-background" alt>
+    <img id="background" alt>
+
+    <form id="search-form">
+      <div id="search-holder">
+        <input type="text" placeholder="Search Google" id="search-bar">
+        <input type="submit" value="" id="search-button">
+      </div>
+    </form>
+
+    <div id="settings-button">
+      <p id="settings-button-text">Settings</p>
+    </div>
+
+    <script src="js/actions.js"></script>
+    <script src="js/script.js" async></script>
+  </body>
+</html>
