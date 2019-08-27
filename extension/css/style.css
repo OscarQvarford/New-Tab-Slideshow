@@ -32,9 +32,7 @@ body {
 
 #background {
   position: fixed;
-  top: 0;
-  left: 0;
-  object-fit: contain;
+  object-fit: cover;
 
   width: 100vw;
   height: 100vh;
@@ -42,14 +40,12 @@ body {
 
 #blurred-background {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: calc(calc((100vh + var(--blur-intensity) * 2) * -0.5));
-  margin-left: calc(calc((100vw + var(--blur-intensity) * 2) * -0.5));
 
-  width: calc(100vw + var(--blur-intensity) * 2);
-  height: calc(100vh + var(--blur-intensity) * 2);
+  width: 100vw;
+  height: 100vh;
 
+  object-fit: cover;
+  transform: scale(1.05);
   filter: blur(var(--blur-intensity));
 }
 
@@ -324,6 +320,19 @@ label {
   height: 80px;
 
   border-bottom: 1px solid var(--theme-color-3);
+}
+
+.item-name {
+  float: left;
+}
+
+.item-remove {
+  float: right;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: red;
 }
 
 .bar {
